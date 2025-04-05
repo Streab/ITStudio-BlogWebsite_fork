@@ -42,7 +42,6 @@
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
     }
 
-    /* --------------------------------- */
     body {
         font-family: 'Microsoft YaHei', Arial, sans-serif;
         margin: 0;
@@ -132,8 +131,6 @@
         align-items: center;
         padding: 15px 0;
     }
-
-    /* --------------------------------- */
 
     /* 导航栏 */
     header {

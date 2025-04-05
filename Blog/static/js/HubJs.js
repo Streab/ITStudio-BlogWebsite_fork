@@ -11,11 +11,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 移除所有与登录模态框相关的代码
     // 保留移动端菜单功能
-    const mobileMenu = document.querySelector('.mobile-menu');
-    const navLinks = document.querySelector('.nav-links');
-    mobileMenu.addEventListener('click', function () {
-        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-    });
+    // const mobileMenu = document.querySelector('.mobile-menu');
+    // const navLinks = document.querySelector('.nav-links');
+    // mobileMenu.addEventListener('click', function () {
+    //     navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+    // });
 
     // 修改搜索框交互逻辑
     const searchContainer = document.querySelector('.search-container');
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
         searchBox.classList.add('active');
     });
 
-    // 当搜索框失去焦点且没有内容时，收起搜索框
+    // 当搜索框失去焦点且没有内容时，颜色恢复
     searchBox.addEventListener('blur', function () {
         if (searchBox.value.trim() === '' && !searchContainer.matches(':hover')) {
             searchBox.classList.remove('active');
@@ -35,11 +35,25 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // 搜索框已有内容时点击图标执行搜索
+    // <a href="{% url 'pages:search' keyword %}"></a>
+    //等待后端同学的src
     searchIcon.addEventListener('click', function () {
         if (searchBox.value.trim() !== '') {
-            // 执行搜索逻辑
-            console.log('执行搜索:', searchBox.value);
-            // 这里可以添加提交表单或发起AJAX请求的代码
+            let keyword = searchBox.value.trim();
+            console.log("keyword = " + keyword + typeof (keyword));
+
+            fetch("{% url 'pages:search' keyword %}")
+                .then(response => response.json())
+                .then(data => {
+                    //这里的变量名等待后端同学提供
+                    const Localsrc = new Array(9).fill({ imgsrc: "", avatarsrc: "", title: "", description: "" })
+                    for (let i = 0; i < Math.min(data.length, 9); i++) {
+                        Localsrc[i] = data[i];
+                        //目前没有办法通过渲染测试，只能选择控制台用于检测
+                        console.log(Localsrc[i]);
+                    }
+                })
+                .catch(error => console.error("error: ", error));
         }
     });
 });
