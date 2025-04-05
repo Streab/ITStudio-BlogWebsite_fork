@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // 搜索框已有内容时点击图标执行搜索
     // <a href="{% url 'pages:search' keyword %}"></a>
     //等待后端同学的src
+    const Localsrc = new Array(9).fill({ imgsrc: "", avatarsrc: "", title: "", description: "" })
     searchIcon.addEventListener('click', function () {
         if (searchBox.value.trim() !== '') {
             let keyword = searchBox.value.trim();
@@ -46,7 +47,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(response => response.json())
                 .then(data => {
                     //这里的变量名等待后端同学提供
-                    const Localsrc = new Array(9).fill({ imgsrc: "", avatarsrc: "", title: "", description: "" })
                     for (let i = 0; i < Math.min(data.length, 9); i++) {
                         Localsrc[i] = data[i];
                         //目前没有办法通过渲染测试，只能选择控制台用于检测
