@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function () {
     searchIcon.addEventListener('click', function () {
         if (searchBox.value.trim() !== '') {
             let keyword = searchBox.value.trim();
-            console.log("keyword = " + keyword + typeof (keyword));
 
             fetch("{% url 'pages:search' keyword %}")
                 .then(response => response.json())
