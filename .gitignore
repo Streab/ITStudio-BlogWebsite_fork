@@ -65,3 +65,5 @@ Thumbs.db
 !_images/**/
 !_images/background.jpg
 !_images/background1.jpg
+Blog/Blog/settings.py
+Blog/user/models.py
